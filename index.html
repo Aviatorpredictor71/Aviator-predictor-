@@ -69,15 +69,15 @@
         }
 
         /* Package Card */
-        .pkg-card { background: #080808; margin-bottom: 25px; padding: 18px; border-radius: 20px; border: 3px solid; animation: rgb-border 10s linear infinite; }
+        .pkg-card { background: #080808; margin-bottom: 25px; padding: 18px; border-radius: 20px; border: 3px solid #FFA500; animation: -border 10s linear infinite; }
         .pkg-logo { width: 260px; height: 90px; border-radius: 15px; border: 1px solid var(--neon-blue); }
 
         /* Payment Modal & Zooming Boxes */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 3000; justify-content: center; align-items: center; }
-        .modal-content { padding: 25px; width: 82%; max-width: 400px; background: #080808; border-radius: 30px; border: 2px solid #800000; text-align: center; position: relative; }
+        .modal-content { padding: 25px; width: 82%; max-width: 400px; background: #08080; border-radius: 30px; border: 2px solid #800000; text-align: center; position: relative; }
         
         .method-box { 
-            padding: 10px; border-radius: 15px; cursor: pointer; 
+            padding: 0px; border-radius: 5px; cursor: pointer; 
             animation: box-zoom 2s infinite ease-in-out;
             transition: 0.3s;
         }
@@ -146,15 +146,15 @@
             <h3 style="color:#fff; text-shadow: 0 0 10px #fff;">SELECT PAYMENT</h3>
             <div style="display:flex; justify-content:center; gap:20px; margin-top:20px;">
                 <div onclick="selectMethod('bkash')" class="method-box bkash-box">
-                    <img src="https://i.ibb.co/Ydy8T2Z/bkash-logo.png" width="80">
+                    <img src="https://i.ibb.co/Ydy8T2Z/bkash-logo.png" width="120">
                 </div>
                 <div onclick="selectMethod('nagad')" class="method-box nagad-box">
-                    <img src="https://i.ibb.co/Vpk3Y1G/nagad-logo.png" width="80">
+                    <img src="https://i.ibb.co/Vpk3Y1G/nagad-logo.png" width="120">
                 </div>
             </div>
             
             <div id="payDetails" style="display:none; margin-top:20px;">
-                <div id="methodNumber" style="padding:15px; border:2px solid var(--neon-cream); color:var(--neon-cream); font-weight:bold; margin-bottom:10px; font-size: 18px; border-radius: 13px;"></div>
+                <div id="methodNumber" style="padding:17px; border:2px solid var(--neon-cream); color:var(--neon-cream); font-weight:bold; margin-bottom:10px; font-size: 22px; border-radius: 13px;"></div>
                 
                 <input type="tel" class="pay-input" placeholder="আপনার ফোন নাম্বার">
                 <input type="email" class="pay-input" placeholder="আপনার জিমেইল">
@@ -214,7 +214,7 @@
     { name: "BK222", logo: "images/1000610435.jpg" },
     { name: "Tk1971", logo: "images/1000610434.jpg" },
     { name: "Bangle but", logo: "images/1000610433.jpg" }
-];
+] ];
         const phrases = ["𝐀𝐯𝐢𝐚𝐭𝐨𝐫 𝐩𝐫𝐞𝐝𝐢𝐜𝐭𝐨𝐫 𝐔𝐥𝐭𝐫𝐚 𝐔𝐬𝐞𝐫", "𝐀𝐯𝐢𝐚𝐭𝐨𝐫🛫 🚀 𝐒𝐞𝐫𝐯𝐞𝐫 𝐜𝐫𝐚𝐜𝐤🧑‍💻"];
         
         const categories = [
@@ -279,7 +279,7 @@
         
         function selectMethod(m) { 
             document.getElementById('payDetails').style.display = 'block'; 
-            document.getElementById('methodNumber').innerText = m === 'bkash' ? "BKash: 01304118834" : "Nagad: 01757349219"; 
+            document.getElementById('methodNumber').innerText = m === 'bkash' ? "বিকাশ থেকে/ ক্যাশ আউট করবেন:👉🏻 01304118834" : "নগদ থেকে সেন্ট মানি বা/ ক্যাশ  আউট করবেন 👉🏻 01757349219"; 
         }
 function render() {
     // Render Packages
@@ -535,14 +535,14 @@ function filterApps() {
     /* নতুন করে ডিজাইন করা ডাইনামিক বর্ডার ও গ্যাপ ফিক্স */
     .about-premium-card {
         margin: 20px 15px 40px 15px; /* নিচের দিকে গ্যাপ রাখা হয়েছে যাতে স্ক্রল শেষ হয় সুন্দরভাবে */
-        padding: 25px;
+        padding: 13px;
         background: rgba(0, 0, 0, 0.8);
-        border-radius: 20px;
+        border-radius: 15px;
         text-align: center;
         position: relative;
         border: 2px solid #ff003c;
         /* ডাইনামিক নিয়ন কালার এনিমেশন */
-        animation: dynamicGlow 2s infinite linear;
+        animation: dynamicGlow 9s infinite linear;
     }
 
     .about-title {
@@ -556,7 +556,7 @@ function filterApps() {
     .about-text {
         color: #e0e0e0;
         font-size: 17px;
-        line-height: 1.7;
+        line-height: 1.9;
         text-align: justify;
         font-family: 'Segoe UI', sans-serif;
         margin-bottom: 20px;
@@ -589,4 +589,3 @@ function filterApps() {
     }
 </style>   
 </html> 
-
