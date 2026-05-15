@@ -931,102 +931,80 @@
             boxes.forEach(box => observer.observe(box));
         }
 
-        // ১. টাস্ক জেনারেটর এবং আপনার আসল লিংক সেটআপ এরিয়া
+        // ১. আপনার ১০টি টেলিগ্রাম চ্যানেলের আসল লিংকসমূহ
+const gridLinks = [
+    "https://getblock.me/?uid=24263586",
+    "https://t.me/smart_earning_money_to_bot/app?startapp=6690005625",
+    "https://t.me/BDFreeFire_Bot",
+    "https://t.me/alisha_rasel",
+    "https://t.me/Mehreen_Nahar",
+    "https://t.me/shahariyatech",
+    "https://t.me/MoneyShare1bot",
+    "https://t.me/followme_200k",
+    "https://t.me/Amir_official_bd",
+    "https://t.me/quotextraderlucky19"
+];
+
+// ২. আপনার ১৫টি ইউটিউব লিংকসমূহ
+const youtubeLinks = [
+    "https://youtu.be/video1", "https://youtu.be/video2", "https://youtu.be/video3",
+    "https://youtu.be/video4", "https://youtu.be/video5", "https://youtu.be/video6",
+    "https://youtu.be/video7", "https://youtu.be/video8", "https://youtu.be/video9",
+    "https://youtu.be/video10", "https://youtu.be/video11", "https://youtu.be/video12",
+    "https://youtu.be/video13", "https://youtu.be/video14", "https://youtu.be/video15"
+];
+
+// ৩. টাস্ক জেনারেটর ফাংশন (যেখানে এমাউন্ট কাউন্ট হবে)
 function generateTasks() {
     const tgList = document.getElementById('tg-task-list');
     const ytList = document.getElementById('yt-task-list');
-    tgList.innerHTML = ''; ytList.innerHTML = '';
+    if(!tgList || !ytList) return;
 
-    // এখানে আপনার ১০টি টেলিগ্রাম চ্যানেলের আসল লিংকগুলো বসাবেন
-    const telegramLinks = [
-        "https://t.me/your_channel_1", 
-        "https://t.me/your_channel_2", 
-        "https://t.me/your_channel_3", 
-        "https://t.me/your_channel_4",
-        "https://t.me/your_channel_5",
-        "https://t.me/your_channel_6",
-        "https://t.me/your_channel_7",
-        "https://t.me/your_channel_8",
-        "https://t.me/your_channel_9",
-        "https://t.me/your_channel_10"
-    ]; 
+    tgList.innerHTML = ''; 
+    ytList.innerHTML = '';
 
-
-    // এখানে আপনার ১৫টি ইউটিউব ভিডিওর আসল লিংকগুলো বসাবেন
-    const youtubeLinks = [
-        "https://youtu.be/video_id_1", 
-        "https://youtu.be/video_id_2", 
-        "https://youtu.be/video_id_3", 
-        "https://youtu.be/video_id_4",
-        "https://youtu.be/video_id_5",
-        "https://youtu.be/video_id_6",
-        "https://youtu.be/video_id_7",
-        "https://youtu.be/video_id_8",
-        "https://youtu.be/video_id_9",
-        "https://youtu.be/video_id_10",
-        "https://youtu.be/video_id_11",
-        "https://youtu.be/video_id_12",
-        "https://youtu.be/video_id_13",
-        "https://youtu.be/video_id_14",
-        "https://youtu.be/video_id_15"
-    ];
-
-    // টেলিগ্রাম লুপ
-    for(let i = 1; i <= 10; i++) {
+    // টেলিগ্রাম টাস্ক লুপ
+    gridLinks.forEach((link, i) => {
         let card = document.createElement('div');
         card.className = 'task-card tg';
-        let currentTgLink = telegramLinks[i-1] || "https://t.me/example"; 
-        
         card.innerHTML = `
             <i class="fab fa-telegram"></i>
             <div class="task-details">
-                <p>Join Official Telegram Channel #${i}</p>
+                <p>Join Official Telegram Channel #${i+1}</p>
                 <span>Reward: ৳25.00</span>
             </div>
-            <button class="task-btn" onclick="completeTask(this, 25.00, '${currentTgLink}')">Visit</button>
+            <button class="task-btn" onclick="handleTaskClick(this, 25.00, '${link}')">Visit</button>
         `;
         tgList.appendChild(card);
-    }
+    });
 
-    // ইউটিউব লুপ
-    for(let i = 1; i <= 15; i++) {
+    // ইউটিউব টাস্ক লুপ
+    youtubeLinks.forEach((link, i) => {
         let card = document.createElement('div');
         card.className = 'task-card yt';
-        let currentYtLink = youtubeLinks[i-1] || "https://youtube.com";
-
         card.innerHTML = `
             <i class="fab fa-youtube"></i>
             <div class="task-details">
-                <p>Watch Sponsored YouTube Video #${i}</p>
+                <p>Watch Sponsored YouTube Video #${i+1}</p>
                 <span>Reward: ৳30.00</span>
             </div>
-            <button class="task-btn" onclick="completeTask(this, 30.00, '${currentYtLink}')">Watch</button>
+            <button class="task-btn" onclick="handleTaskClick(this, 30.00, '${link}')">Watch</button>
         `;
         ytList.appendChild(card);
-    }
+    });
 }
 
-// ২. ভিডিও দেখা বা ভিজিট করার পর ব্যালেন্স কাউন্ট ও ভেরিফিকেশন লজিক
-function completeTask(button, reward, targetUrl) {
-    if(button.classList.contains('completed')) return;
+// ৪. টাস্ক ক্লিক হ্যান্ডেলার (টাকা যোগ করার জন্য)
+function handleTaskClick(button, amount, link) {
+    // নতুন ট্যাবে লিংক ওপেন হবে
+    window.open(link, '_blank');
     
-    // ইউজারকে সরাসরি ইউটিউব বা টেলিগ্রাম লিংকে রিডাইরেক্ট করবে
-    window.open(targetUrl, '_blank');
-    
-    setTimeout(() => {
-        // ইউজার টাস্ক শেষ করে ব্যাক আসলে এই কনফার্মেশন বক্সটি দেখাবে
-        let verified = confirm("আপনি কি সঠিকভাবে নির্দিষ্ট চ্যানেল বা ভিডিওতে জয়েন/ওয়াচ সম্পন্ন করেছেন?");
-        
-        if(verified) {
-            userData.balance += reward; // মেইন ব্যালেন্স কাউন্ট ও যোগ হচ্ছে
-            button.innerText = "Completed";
-            button.classList.add('completed');
-            button.disabled = true;
-            saveUserData(); // ডাটা সেভ হয়ে উপরে লাইভ স্ক্রিনে আপডেট হবে
-        } else {
-            alert("টাকা ব্যালেন্সে যোগ করার জন্য অবশ্যই টাস্কটি সঠিকভাবে সম্পন্ন করতে হবে।");
-        }
-    }, 1000);
+    // এবার আপনার মেইন completeTask ফাংশন কল করে টাকা যোগ করা হবে
+    if (typeof completeTask === "function") {
+        completeTask(button, amount);
+    } else {
+        alert("৳" + amount + " আপনার ব্যালেন্সে যোগ হয়েছে!");
+    }
 }
 
 
